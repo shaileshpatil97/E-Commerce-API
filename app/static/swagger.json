@@ -1,0 +1,150 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "E-Commerce API",
+    "description": "API documentation for the E-Commerce platform",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:5000",
+      "description": "Local development server"
+    }
+  ],
+  "paths": {
+    "/api/auth/register": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "Register a new user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {"type": "string"},
+                  "password": {"type": "string"},
+                  "name": {"type": "string"}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {"description": "User registered successfully"},
+          "400": {"description": "Invalid input"}
+        }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "Login user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {"type": "string"},
+                  "password": {"type": "string"}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {"description": "Login successful"},
+          "401": {"description": "Invalid credentials"}
+        }
+      }
+    },
+    "/api/products": {
+      "get": {
+        "tags": ["Products"],
+        "summary": "Get all products",
+        "responses": {
+          "200": {"description": "List of products"}
+        }
+      },
+      "post": {
+        "tags": ["Products"],
+        "summary": "Create a new product",
+        "security": [{"bearerAuth": []}],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {"type": "string"},
+                  "description": {"type": "string"},
+                  "price": {"type": "number"},
+                  "stock": {"type": "integer"}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {"description": "Product created"},
+          "401": {"description": "Unauthorized"}
+        }
+      }
+    },
+    "/api/carts": {
+      "get": {
+        "tags": ["Cart"],
+        "summary": "Get user's cart",
+        "security": [{"bearerAuth": []}],
+        "responses": {
+          "200": {"description": "Cart details"},
+          "401": {"description": "Unauthorized"}
+        }
+      }
+    },
+    "/api/orders": {
+      "get": {
+        "tags": ["Orders"],
+        "summary": "Get user's orders",
+        "security": [{"bearerAuth": []}],
+        "responses": {
+          "200": {"description": "List of orders"},
+          "401": {"description": "Unauthorized"}
+        }
+      },
+      "post": {
+        "tags": ["Orders"],
+        "summary": "Create a new order",
+        "security": [{"bearerAuth": []}],
+        "responses": {
+          "201": {"description": "Order created"},
+          "401": {"description": "Unauthorized"}
+        }
+      }
+    },
+    "/api/coupons": {
+      "get": {
+        "tags": ["Coupons"],
+        "summary": "Get all coupons",
+        "security": [{"bearerAuth": []}],
+        "responses": {
+          "200": {"description": "List of coupons"},
+          "401": {"description": "Unauthorized"}
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+} 
