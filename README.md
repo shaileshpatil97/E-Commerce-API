@@ -66,7 +66,7 @@ A scalable and robust E-Commerce backend API built with Flask, MongoDB, Redis, a
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/ecommerce-api.git
+git clone https://github.com/shaileshpatil97/ecommerce-api.git
 cd ecommerce-api
 ```
 
